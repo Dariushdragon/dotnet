@@ -1,153 +1,29 @@
-﻿#nullable disable
-
-using Microsoft.Data.SqlClient;
+﻿using BenchmarkDotNet.Running;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.EntityFrameworkCore.Storage;
 using QueryProviderExample;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Reflection.Metadata;
-using System.Transactions;
+using QueryProviderExample.Benchmark;
+using System.Diagnostics;
 
-//var connectionString = "Server=DESKTOP-TVCSFN3\\MHA;Database=iCodeNext;Trusted_Connection=True;Encrypt=false";
-////var connection = new SqlConnection(connectionString);
-//var dbContextOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
-//                           .UseSqlServer(connectionString)
-//                           .LogTo(Console.WriteLine, Microsoft.Extensions.Logging.LogLevel.Information)
-//                           .EnableSensitiveDataLogging()
-//                           .Options;
-
-//ApplicationDbContext context = new(dbContextOptions);
-// context.Database.EnsureDeleted();
-// context.Database.EnsureCreated();
-
-//#region MyRegion
+ApplicationDbContext context = new();
 
 
-////context.Authors.Add(new Auther { Name = "Mohammad" });
-////context.Authors.Add(new Auther { Name = "Mohammad_1" });
-
-////context.SaveChanges();
-
-////#
-////context.Authors.Add(new Auther { Name = "Mohammad" });
-////context.Authors.Add(new Auther { Name = "Mohammad_1111" });
-////context.SaveChanges();
-
-////#
-////var auther = new Auther { Name = "Mohammad" };
-////context.Authors.Add(auther);
-////context.SaveChanges();
-
-////context.Posts.Add(new Post { AutherId = auther.Id, Title = "C# Books" });
-////context.SaveChanges();
-
-////#
-////var auther = new Auther { Name = "Mohammad" };
-////context.Authors.Add(auther);
-////context.SaveChanges();
-
-////context.Posts.Add(new Post { AutherId = auther.Id, Title = "C# Books_123" });
-////context.SaveChanges();
-
-
-////#
-////using var transaction = context.Database.BeginTransaction();
-////try
-////{
-
-////    var auther = new Auther { Name = "Mohammad" };
-////    context.Authors.Add(auther);
-////    context.SaveChanges();
-////    context.Posts.Add(new Post { AutherId = auther.Id, Title = "C# Books" });
-////    context.SaveChanges();
-
-////    transaction.Commit();
-////}
-////catch (Exception)
-////{
-////    transaction.Rollback();
-////}
-
-////using var transaction = context.Database.BeginTransaction(System.Data.IsolationLevel.);
-////var auther = new Auther { Name = "Mohammad" };
-////var post = new Post { Title = "C# Books_123" };
-////try
-////{
-////    context.Authors.Add(auther);
-////    context.SaveChanges();
-
-////    transaction.CreateSavepoint("Auther_Added");
-
-////    post.AutherId = auther.Id;
-////    context.Posts.Add(post);
-////    context.SaveChanges();
-
-////    transaction.Commit();
-////}
-////catch (Exception)
-////{
-////    post.Title = "C# New";
-////    transaction.RollbackToSavepoint("Auther_Added");
-////    context.Posts.Add(post);
-////    context.SaveChanges();
-
-////    transaction.Commit();
-////}
-
-//#endregion
-
-////using var context1 = new ApplicationDbContext(dbContextOptions);
-////using var transaction = context1.Database.BeginTransaction();
-////try
-////{
-////    var auther = new Auther { Name = "Mohammad" };
-////    context1.Authors.Add(auther);
-////    context1.SaveChanges();
-
-////    using var context2 = new ApplicationDbContext(dbContextOptions);
-////    context2.Database.UseTransaction(transaction.GetDbTransaction());
-////    var post = new Post { AutherId = auther.Id, Title = "C# Books" };
-////    context2.Posts.Add(post);
-////    context2.SaveChanges();
-
-////    transaction.Commit();
-////}
-////catch (Exception)
-////{
-////    transaction.Rollback();
-////}
-
-//#region TransactionScope
-
-//using (var scope = new TransactionScope(
-//           TransactionScopeOption.Required,
-//           new TransactionOptions { IsolationLevel = IsolationLevel.ReadCommitted }))
+//var pid = Process.GetCurrentProcess().Id;
+//for (int i = 0; i < 10000; i++)
 //{
-//    try
-//    {
-//        using var db_context = new ApplicationDbContext(dbContextOptions);
-//        var auther = new Auther { Name = "Mohammad" };
-//        db_context.Authors.Add(auther);
-//        db_context.SaveChanges();
-
-//        var post = new Post { AutherId = auther.Id, Title = "C# Books_123" };
-//        db_context.Posts.Add(post);
-
-//        db_context.SaveChanges();
-
-//        scope.Complete();
-//    }
-//    catch (Exception e)
-//    {
-
-//    }
+//    var secondQuery = context.Set<Product>()
+//                        .OrderBy(x => x.Name)
+//                        .ThenBy(x => x.Price)
+//                        .AsNoTracking()
+//                        .TagWith("This Is My Special Query :)")
+//                        .ToList();
 //}
-//#endregion
 
 
+//      --This Is My Special Query :)
+//
+//      SELECT [p].[Id], [p].[Name], [p].[Price]
+//      FROM [Product] AS[p]
+//      ORDER BY [p].[Name], [p].[Price]
 
-//Console.ReadKey();
-
-
- 
+BenchmarkRunner.Run(typeof(QueryBenchmark));
