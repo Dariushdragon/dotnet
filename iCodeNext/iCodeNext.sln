@@ -5,9 +5,30 @@ VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D7908595-B848-480D-8BF5-25E5618214B7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrometheusToturial", "PrometheusToturial\PrometheusToturial.csproj", "{DA309E7A-4D00-45F5-8F0F-8CC137CFA836}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{09A16577-4A20-4D53-9826-0067A328C012}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DA309E7A-4D00-45F5-8F0F-8CC137CFA836}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA309E7A-4D00-45F5-8F0F-8CC137CFA836}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA309E7A-4D00-45F5-8F0F-8CC137CFA836}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA309E7A-4D00-45F5-8F0F-8CC137CFA836}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09A16577-4A20-4D53-9826-0067A328C012}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09A16577-4A20-4D53-9826-0067A328C012}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09A16577-4A20-4D53-9826-0067A328C012}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09A16577-4A20-4D53-9826-0067A328C012}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DA309E7A-4D00-45F5-8F0F-8CC137CFA836} = {D7908595-B848-480D-8BF5-25E5618214B7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2612291B-6B99-482B-9E5C-F43B9A4AAB95}

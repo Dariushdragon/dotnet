@@ -1,6 +1,0 @@
-@KeyServices_HostAddress = http://localhost:5142
-
-GET {{KeyServices_HostAddress}}/home/index
-Accept: application/json
-
-###

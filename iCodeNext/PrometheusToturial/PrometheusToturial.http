@@ -1,0 +1,6 @@
+@PrometheusToturial_HostAddress = http://localhost:5121
+
+GET {{PrometheusToturial_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

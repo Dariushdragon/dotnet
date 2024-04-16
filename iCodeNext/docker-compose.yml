@@ -1,0 +1,31 @@
+version: '3.4'
+
+services:
+  prometheustoturial:
+    container_name: API
+    hostname: prometheustoturial
+    image: ${DOCKER_REGISTRY-}prometheustoturial
+    build:
+      context: .
+      dockerfile: PrometheusToturial/Dockerfile
+    environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+        - ASPNETCORE_URLS=https://+:443;http://+:80
+    ports:
+        - 8082:80
+        - 8084:443
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus_grafprom
+    restart: always
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    healthcheck:
+        test: wget -q --tries=1 -O- http://localhost:9090/
+        interval: 3s
+        timeout: 3s
+        retries: 10
+        start_period: 10s
